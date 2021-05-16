@@ -115,6 +115,7 @@
   114  rm -rf abc 
   115  cd roles/web/
   116  ls -ltr
+  
   117  cat tasks/main.yaml 
   118  cd ../../
   119  ansible-playbook -i inventory apache.yaml 
