@@ -1,0 +1,21 @@
+---
+- name: install apache
+  yum:
+    name: httpd
+    state: present
+
+- name: create index.html and copy to default docroot of apache
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart apache
+
+- name: start and enable httpd service
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+

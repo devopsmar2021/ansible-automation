@@ -1,0 +1,25 @@
+---
+
+- name: Apache playbook
+  hosts: webserver
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: install apache
+      yum:
+        name: httpd
+        state: present
+
+    - name: create index.html and copy to default docroot of apache
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: start and enable httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
